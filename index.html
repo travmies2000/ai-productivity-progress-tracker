@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Productivity Course Path</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Productivity System | Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
-        <h1>Course Progress: <span id="pct">0</span>%</h1>
+        <header>
+            <h1>AI Productivity System</h1>
+            <p>Module Progress: <span id="pct">0</span>%</p>
+        </header>
         <div id="progress-bar"><div id="progress-fill"></div></div>
+        
         <div id="view">
-            <h2 id="module-title">Click "Start Course"</h2>
-            <p id="module-desc">Complete the assessment to move forward.</p>
-            <textarea id="assessment" placeholder="Self-Assessment: What was your key takeaway and how did you implement it?"></textarea>
-            <div style="margin-top: 10px;">
-                <button id="next-btn">Complete & Continue</button>
-                <button id="export-btn" style="background: #6b7280;">Export Reflections</button>
+            <h2 id="module-title">Initializing...</h2>
+            <div id="summary-container"></div>
+            <textarea id="assessment" placeholder="Document your implementation notes or key takeaways here..."></textarea>
+            <div class="actions">
+                <button id="next-btn">Mark Complete</button>
+                <button id="export-btn">Export Progress Log</button>
             </div>
         </div>
     </div>
