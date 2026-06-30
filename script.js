@@ -1,10 +1,10 @@
 const curriculum = [
-    { module: "Module 1", lessons: ["The Augmented Professional Framework", "The Ethics of Accuracy", "Tool Selection"] },
-    { module: "Module 2", lessons: ["The S.C.O.P.E. Framework", "Iterative Refinement"] },
-    { module: "Module 3", lessons: ["The Zero Inbox AI Assistant", "Meeting Mastery", "Content Repurposing"] },
-    { module: "Module 4", lessons: ["Data Analysis for Non-Mathletes", "Visual Communication", "Research & Fact-Checking"] },
-    { module: "Module 5", lessons: ["Custom Instructions", "The 15-Minute Weekly Audit"] },
-    { module: "Bonus", lessons: ["The Professional AI Prompt Library", "The AI Tool Tracker", "The Human-Touch Checklist"] }
+    { module: "Module 1: The AI Mindset Shift", lessons: ["The Augmented Professional Framework", "The Ethics of Accuracy", "Tool Selection"] },
+    { module: "Module 2: Advanced Prompting for Non-Techies", lessons: ["The S.C.O.P.E. Framework", "Iterative Refinement"] },
+    { module: "Module 3: Daily Workflow Automation", lessons: ["The Zero Inbox AI Assistant", "Meeting Mastery", "Content Repurposing"] },
+    { module: "Module 4: The Professional’s AI Toolbox", lessons: ["Data Analysis for Non-Mathletes", "Visual Communication", "Research & Fact-Checking"] },
+    { module: "Module 5: Building Your Personal AI System", lessons: ["Custom Instructions", "The 15-Minute Weekly Audit"] },
+    { module: "Included Bonuses (The 'Value Stack')", lessons: ["The Professional AI Prompt Library", "The AI Tool Tracker", "The Human-Touch Checklist"] }
 ];
 
 const resourceLinks = {
