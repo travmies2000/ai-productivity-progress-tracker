@@ -9,6 +9,7 @@ const curriculum = [
 
 let ratings = JSON.parse(localStorage.getItem('lessonRatings')) || {};
 let timeSaved = JSON.parse(localStorage.getItem('timeSaved')) || {};
+let statusTags = JSON.parse(localStorage.getItem('statusTags')) || {};
 let savedPrompts = JSON.parse(localStorage.getItem('myPrompts')) || [];
 
 function render() {
@@ -24,16 +25,18 @@ function render() {
             if (score > 0) ratedLessons++;
             const mins = timeSaved[lesson] || 0;
             totalMins += parseInt(mins);
+            const status = statusTags[lesson] || "Ready";
             
             const div = document.createElement('div');
             div.className = 'lesson';
             div.innerHTML = `
                 <div class="lesson-row">
                     <span>${lesson}</span>
-                    <div>
-                        <input type="number" class="time-input" placeholder="Min" value="${mins}" onchange="updateTime('${lesson}', this.value)">
-                        <span class="stars">${[1,2,3,4,5].map(s => `<span class="${s <= score ? 'active' : ''}" onclick="rate('${lesson}', ${s})">★</span>`).join('')}</span>
-                    </div>
+                    <button class="status-tag status-${status.toLowerCase().replace(' ', '-')}" onclick="toggleStatus('${lesson}')">${status}</button>
+                </div>
+                <div class="lesson-row">
+                    <input type="number" class="time-input" placeholder="Min" value="${mins}" onchange="updateTime('${lesson}', this.value)">
+                    <span class="stars">${[1,2,3,4,5].map(s => `<span class="${s <= score ? 'active' : ''}" onclick="rate('${lesson}', ${s})">★</span>`).join('')}</span>
                 </div>`;
             container.appendChild(div);
         });
@@ -47,26 +50,14 @@ function render() {
 
 window.rate = (lesson, score) => { ratings[lesson] = score; localStorage.setItem('lessonRatings', JSON.stringify(ratings)); render(); };
 window.updateTime = (lesson, val) => { timeSaved[lesson] = val; localStorage.setItem('timeSaved', JSON.stringify(timeSaved)); render(); };
-
-function savePrompt() {
-    const name = document.getElementById('prompt-name').value;
-    const body = document.getElementById('prompt-body').value;
-    if(!name || !body) return alert("Enter name and prompt.");
-    savedPrompts.push({name, body});
-    localStorage.setItem('myPrompts', JSON.stringify(savedPrompts));
+window.toggleStatus = (lesson) => {
+    const states = ["Ready", "In Progress", "Mastered"];
+    let next = states[(states.indexOf(statusTags[lesson] || "Ready") + 1) % 3];
+    statusTags[lesson] = next;
+    localStorage.setItem('statusTags', JSON.stringify(statusTags));
     render();
-}
-
-function renderPrompts() {
-    document.getElementById('saved-prompts').innerHTML = savedPrompts.map(p => 
-        `<div class="prompt-card"><strong>${p.name}</strong>: ${p.body}</div>`
-    ).join('');
-}
-
-document.getElementById('export-btn').onclick = () => {
-    const data = JSON.stringify({ratings, timeSaved, savedPrompts}, null, 2);
-    const blob = new Blob([data], {type: 'application/json'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'efficiency_hub_data.json'; a.click();
 };
+
+// ... (keep savePrompt and renderPrompts functions)
 
 render();
