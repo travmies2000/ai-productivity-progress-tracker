@@ -1,9 +1,12 @@
 const tasks = [
-    "Introduction to AI Productivity",
-    "Communication Management Tools",
-    "Research and Analysis Automation",
-    "Workflow Integration & APIs",
-    "Scheduling & Focus Time Optimization"
+    "Module 1: The AI Mindset Shift",
+    "Module 2: Advanced Prompting (S.C.O.P.E. Framework)",
+    "Module 3: Daily Workflow Automation",
+    "Module 4: The Professional’s AI Toolbox",
+    "Module 5: Building Your Personal AI System",
+    "Bonus: Professional AI Prompt Library",
+    "Bonus: AI Tool Tracker",
+    "Bonus: The Human-Touch Checklist"
 ];
 
 const list = document.getElementById('task-list');
@@ -16,6 +19,7 @@ function updateUI() {
         const li = document.createElement('li');
         li.textContent = task;
         if (completedTasks.includes(index)) li.className = 'done';
+        
         li.onclick = () => {
             if (completedTasks.includes(index)) {
                 completedTasks = completedTasks.filter(i => i !== index);
@@ -27,6 +31,7 @@ function updateUI() {
         };
         list.appendChild(li);
     });
+    
     const pct = Math.round((completedTasks.length / tasks.length) * 100);
     fill.style.width = pct + '%';
     fill.textContent = pct + '%';
