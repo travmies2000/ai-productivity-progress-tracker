@@ -3,26 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Productivity System | Dashboard</title>
+    <title>AI Productivity System | Mastery Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
         <header>
             <h1>AI Productivity System</h1>
-            <p>Module Progress: <span id="pct">0</span>%</p>
+            <p>Mastery Progress: <span id="pct">0</span>%</p>
         </header>
         <div id="progress-bar"><div id="progress-fill"></div></div>
-        
-        <div id="view">
-            <h2 id="module-title">Initializing...</h2>
-            <div id="summary-container"></div>
-            <textarea id="assessment" placeholder="Document your implementation notes or key takeaways here..."></textarea>
-            <div class="actions">
-                <button id="next-btn">Mark Complete</button>
-                <button id="export-btn">Export Progress Log</button>
-            </div>
-        </div>
+        <div id="course-list"></div>
+        <button id="export-btn">Export Mastery Data</button>
     </div>
     <script src="script.js"></script>
 </body>
