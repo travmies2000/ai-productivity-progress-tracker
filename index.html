@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AI Productivity Progress Tracker</title>
+    <title>AI Productivity Course Path</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>AI Productivity Systems</h1>
-    <div id="progress-container">
-        <div id="progress-bar"><div id="progress-fill">0%</div></div>
+    <div id="app">
+        <h1>Course Progress: <span id="pct">0</span>%</h1>
+        <div id="progress-bar"><div id="progress-fill"></div></div>
+        <div id="view">
+            <h2 id="module-title">Click "Start Course"</h2>
+            <p id="module-desc">Complete the assessment to move forward.</p>
+            <textarea id="assessment" placeholder="Self-Assessment: What was your key takeaway and how did you implement it?"></textarea>
+            <button id="next-btn">Complete & Continue</button>
+        </div>
     </div>
-    <ul id="task-list">
-        </ul>
     <script src="script.js"></script>
 </body>
 </html>
