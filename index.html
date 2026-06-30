@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Productivity System | Executive Hub</title>
+    <title>AI Productivity System | Command Center</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
         <header>
             <h1>AI Productivity System</h1>
-            <p>Mastery: <span id="pct">0</span>% | Time Saved: <span id="total-time">0</span> mins</p>
+            <p>Mastery: <span id="pct">0</span>% | Total Time Saved: <span id="total-time">0</span> mins</p>
         </header>
         <div id="progress-bar"><div id="progress-fill"></div></div>
         
+        <section id="weekly-audit">
+            <h2>15-Minute Weekly Audit</h2>
+            <textarea id="weekly-goals" placeholder="Define your focus goals for the coming week..."></textarea>
+            <button onclick="resetWeeklyLog()" style="background: #e11d48; margin-top: 10px;">Reset Efficiency Stats</button>
+        </section>
+
         <input type="text" id="search" placeholder="Search lessons or resources..." onkeyup="render()">
-        
         <div id="course-list"></div>
         
         <section id="sandbox">
@@ -26,7 +31,7 @@
             <div id="saved-prompts"></div>
         </section>
 
-        <button id="export-btn">Export Full Execution Log</button>
+        <button id="export-btn" style="background: #475569; margin-top: 20px;">Export Full Execution Log</button>
     </div>
     <script src="script.js"></script>
 </body>
