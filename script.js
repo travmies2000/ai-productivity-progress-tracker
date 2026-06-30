@@ -16,6 +16,7 @@ function updateUI() {
     if (currentIndex >= courseData.length) {
         title.textContent = "Course Complete! Great job.";
         area.style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
         return;
     }
     title.textContent = courseData[currentIndex];
@@ -26,12 +27,22 @@ function updateUI() {
 }
 
 document.getElementById('next-btn').onclick = () => {
-    if (area.value.length < 20) return alert("Please provide a meaningful self-assessment.");
+    if (area.value.length < 20) return alert("Please provide a meaningful self-assessment (at least 20 characters).");
     assessments[currentIndex] = area.value;
     localStorage.setItem('assessments', JSON.stringify(assessments));
     currentIndex++;
     localStorage.setItem('courseIdx', currentIndex);
     updateUI();
+};
+
+document.getElementById('export-btn').onclick = () => {
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(assessments, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "course_reflections.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
 };
 
 updateUI();
