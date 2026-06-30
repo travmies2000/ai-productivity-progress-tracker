@@ -1,0 +1,6 @@
+body { font-family: sans-serif; max-width: 600px; margin: 2rem auto; padding: 0 1rem; }
+#progress-container { width: 100%; background: #eee; height: 30px; border-radius: 15px; margin-bottom: 20px; overflow: hidden; }
+#progress-fill { height: 100%; background: #4caf50; width: 0%; text-align: center; color: white; transition: width 0.3s; }
+ul { list-style: none; padding: 0; }
+li { padding: 10px; border-bottom: 1px solid #ccc; cursor: pointer; }
+li.done { text-decoration: line-through; color: #888; }
