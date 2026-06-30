@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Productivity System | Mastery Tracker</title>
+    <title>AI Productivity System | Execution Hub</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,8 +13,18 @@
             <p>Mastery Progress: <span id="pct">0</span>%</p>
         </header>
         <div id="progress-bar"><div id="progress-fill"></div></div>
+        
         <div id="course-list"></div>
-        <button id="export-btn">Export Mastery Data</button>
+        
+        <section id="sandbox">
+            <h2>Prompt Sandbox</h2>
+            <input type="text" id="prompt-name" placeholder="Prompt Name/Use Case">
+            <textarea id="prompt-body" placeholder="Paste your prompt here..."></textarea>
+            <button onclick="savePrompt()" style="background: #2563eb;">Save to Hub</button>
+            <div id="saved-prompts"></div>
+        </section>
+
+        <button id="export-btn">Export All Data</button>
     </div>
     <script src="script.js"></script>
 </body>
