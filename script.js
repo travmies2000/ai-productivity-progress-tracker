@@ -1,50 +1,52 @@
-const courseData = [
-    "Module 1: The AI Mindset Shift", "Module 2: Advanced Prompting", 
-    "Module 3: Daily Workflow Automation", "Module 4: The Professional’s AI Toolbox", 
-    "Module 5: Building Your Personal AI System", "Bonus: Value Stack"
+const curriculum = [
+    { module: "Module 1", lessons: ["The Augmented Professional Framework", "The Ethics of Accuracy", "Tool Selection"] },
+    { module: "Module 2", lessons: ["The S.C.O.P.E. Framework", "Iterative Refinement"] },
+    { module: "Module 3", lessons: ["The Zero Inbox AI Assistant", "Meeting Mastery", "Content Repurposing"] },
+    { module: "Module 4", lessons: ["Data Analysis for Non-Mathletes", "Visual Communication", "Research & Fact-Checking"] },
+    { module: "Module 5", lessons: ["Custom Instructions", "The 15-Minute Weekly Audit"] },
+    { module: "Bonus", lessons: ["The Professional AI Prompt Library", "The AI Tool Tracker", "The Human-Touch Checklist"] }
 ];
 
-let currentIndex = parseInt(localStorage.getItem('courseIdx')) || 0;
-let assessments = JSON.parse(localStorage.getItem('assessments')) || {};
+let ratings = JSON.parse(localStorage.getItem('lessonRatings')) || {};
+const container = document.getElementById('course-list');
 
-const title = document.getElementById('module-title');
-const pct = document.getElementById('pct');
-const fill = document.getElementById('progress-fill');
-const area = document.getElementById('assessment');
-const summary = document.getElementById('summary-container');
+function render() {
+    container.innerHTML = '';
+    let totalLessons = 0;
+    let ratedLessons = 0;
 
-function updateUI() {
-    if (currentIndex >= courseData.length) {
-        title.textContent = "Course Complete!";
-        area.style.display = 'none';
-        summary.innerHTML = "<h3>Reflective Journal Summary:</h3>" + 
-            Object.entries(assessments).map(([k, v]) => `<strong>${courseData[k]}</strong>: <p>${v}</p>`).join('<hr>');
-        return;
-    }
-    title.textContent = courseData[currentIndex];
-    area.value = assessments[currentIndex] || "";
-    const p = Math.round((currentIndex / courseData.length) * 100);
-    fill.style.width = p + '%';
-    pct.textContent = p;
+    curriculum.forEach(mod => {
+        container.innerHTML += `<h3>${mod.module}</h3>`;
+        mod.lessons.forEach(lesson => {
+            totalLessons++;
+            const score = ratings[lesson] || 0;
+            if (score > 0) ratedLessons++;
+            
+            const div = document.createElement('div');
+            div.className = 'lesson';
+            div.innerHTML = `<span>${lesson}</span><div class="stars">${[1,2,3,4,5].map(s => 
+                `<span class="${s <= score ? 'active' : ''}" onclick="rate('${lesson}', ${s})">★</span>`).join('')}</div>`;
+            container.appendChild(div);
+        });
+    });
+
+    const pct = Math.round((ratedLessons / totalLessons) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('pct').textContent = pct;
 }
 
-document.getElementById('next-btn').onclick = () => {
-    if (area.value.length < 20) return alert("Please provide a meaningful entry (at least 20 characters).");
-    assessments[currentIndex] = area.value;
-    localStorage.setItem('assessments', JSON.stringify(assessments));
-    currentIndex++;
-    localStorage.setItem('courseIdx', currentIndex);
-    updateUI();
+window.rate = (lesson, score) => {
+    ratings[lesson] = score;
+    localStorage.setItem('lessonRatings', JSON.stringify(ratings));
+    render();
 };
 
 document.getElementById('export-btn').onclick = () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(assessments, null, 2));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "my_ai_productivity_log.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    const data = JSON.stringify(ratings, null, 2);
+    const blob = new Blob([data], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'course_mastery.json'; a.click();
 };
 
-updateUI();
+render();
