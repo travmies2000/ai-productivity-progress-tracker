@@ -4,23 +4,14 @@
     --border: #c1d6d9; --danger: #b91c1c; 
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: var(--text-main); height: 100vh; display: flex; justify-content: center; padding: 2rem; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: var(--text-main); padding: 2rem; display: flex; justify-content: center; height: 100vh; }
 #dashboard { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; width: 100%; max-width: 1400px; height: 100%; }
 #sidebar { background: var(--bg-card); border-radius: 16px; padding: 2rem; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 1.5rem; height: fit-content; }
-.metric-value { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-#progress-bar { width: 100%; background: var(--border); height: 8px; border-radius: 4px; overflow: hidden; }
 #progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.6s ease; }
-#weekly-audit { background: var(--bg-card); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); }
-.audit-header { margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
-#weekly-goals { width: 100%; height: 100px; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 1rem; background: var(--bg-main); }
-.btn-primary, .btn-secondary, .btn-danger { width: 100%; padding: 0.75rem; border-radius: 8px; border: none; cursor: pointer; font-weight: 600; }
-.btn-primary { background: var(--primary); color: white; }
-.btn-secondary { background: var(--bg-card); border: 1px solid var(--border); }
-.btn-danger { background: white; color: var(--danger); border: 1px solid var(--danger); }
 #main-content { background: var(--bg-card); border-radius: 16px; padding: 2.5rem; border: 1px solid var(--border); overflow-y: auto; height: 100%; }
+h3 { font-size: 1.1rem; color: var(--primary); margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-main); text-transform: uppercase; letter-spacing: 0.05em; }
+.lesson { background: var(--bg-card); padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; gap: 0.75rem; transition: all 0.2s ease; }
+.lesson:hover { border-color: var(--primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+.lesson-row { display: flex; justify-content: space-between; align-items: center; }
+.lesson-link { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
 #sandbox { margin-top: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 16px; border: 1px solid var(--border); }
-.sandbox-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
-#prompt-name, #prompt-body, #prompt-notes { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem; }
-.prompt-card { background: var(--bg-main); padding: 1.5rem; margin-top: 1.5rem; border-radius: 12px; border-left: 5px solid var(--primary); }
-.focus-mode #sidebar { display: none; }
-.focus-mode #dashboard { grid-template-columns: 1fr; max-width: 800px; }
