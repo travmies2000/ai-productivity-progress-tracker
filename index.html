@@ -9,13 +9,11 @@
 </head>
 <body>
     <div id="dashboard">
-        <!-- SIDEBAR -->
         <aside id="sidebar">
             <header>
                 <h1>Command Center</h1>
                 <p class="subtitle">AI Productivity System</p>
             </header>
-
             <div class="metric-cards">
                 <div class="metric">
                     <span class="metric-label">Mastery</span>
@@ -26,36 +24,30 @@
                     <span class="metric-value"><span id="total-time">0</span> min</span>
                 </div>
             </div>
-
             <div id="progress-bar"><div id="progress-fill"></div></div>
-
             <section id="weekly-audit">
                 <h2>15-Minute Audit</h2>
                 <textarea id="weekly-goals" placeholder="Define this week's high-leverage goals..."></textarea>
                 <button class="btn-danger" onclick="resetWeeklyLog()">Reset Week</button>
             </section>
-
             <div class="sidebar-actions">
                 <button id="focus-btn" class="btn-primary" onclick="toggleFocusMode()">Toggle Deep-Focus</button>
                 <button id="export-btn" class="btn-secondary">Export Log</button>
             </div>
         </aside>
 
-        <!-- MAIN CONTENT -->
         <main id="main-content">
             <div class="search-container">
                 <input type="text" id="search" placeholder="Search lessons or resources..." onkeyup="render()">
             </div>
-            
             <div id="course-list"></div>
-            
             <section id="sandbox">
                 <div class="sandbox-header">
                     <h2>Prompt Sandbox</h2>
                     <span class="badge">Professional Tool</span>
                 </div>
                 <div class="sandbox-inputs">
-                    <input type="text" id="prompt-name" placeholder="Prompt Name (e.g., 'AEO Content Generator')">
+                    <input type="text" id="prompt-name" placeholder="Prompt Name">
                     <textarea id="prompt-body" placeholder="Paste your engineered prompt here..."></textarea>
                     <textarea id="prompt-notes" placeholder="Version notes or iteration thoughts..."></textarea>
                     <button class="btn-primary" onclick="savePrompt()">Save to Hub</button>
