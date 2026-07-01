@@ -10,6 +10,7 @@
     <div id="app">
         <header>
             <h1>AI Productivity System</h1>
+            <button id="focus-btn" onclick="toggleFocusMode()">Toggle Deep-Focus Mode</button>
             <p>Mastery: <span id="pct">0</span>% | Total Time Saved: <span id="total-time">0</span> mins</p>
         </header>
         <div id="progress-bar"><div id="progress-fill"></div></div>
@@ -27,6 +28,7 @@
             <h2>Prompt Sandbox</h2>
             <input type="text" id="prompt-name" placeholder="Prompt Name">
             <textarea id="prompt-body" placeholder="Paste your prompt here..."></textarea>
+            <textarea id="prompt-notes" placeholder="Version notes or iteration thoughts..."></textarea>
             <button onclick="savePrompt()" style="background: #2563eb;">Save to Hub</button>
             <div id="saved-prompts"></div>
         </section>
