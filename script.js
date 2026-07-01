@@ -6,12 +6,16 @@ const curriculum = [
     { module: "Module 5: Building Systems", lessons: ["Custom Instructions", "The 15-Minute Weekly Audit"] }
 ];
 
-let state = JSON.parse(localStorage.getItem('hubState')) || { completed: [], prompts: [] };
+let state = JSON.parse(localStorage.getItem('hubState')) || { completed: [], prompts: [], notes: {} };
 
-function toggleLesson(lesson) {
-    const idx = state.completed.indexOf(lesson);
-    idx > -1 ? state.completed.splice(idx, 1) : state.completed.push(lesson);
+function toggleLesson(l) {
+    state.completed.includes(l) ? state.completed = state.completed.filter(i => i !== l) : state.completed.push(l);
     saveAndRender();
+}
+
+function saveNote(lesson, val) {
+    state.notes[lesson] = val;
+    localStorage.setItem('hubState', JSON.stringify(state));
 }
 
 function render(query = "") {
@@ -23,9 +27,12 @@ function render(query = "") {
             <div class="ui-card">
                 <h3>${mod.module}</h3>
                 ${filtered.map(l => `
-                    <div class="lesson ${state.completed.includes(l) ? 'done' : ''}">
-                        <span>${l}</span>
-                        <button class="btn-secondary" onclick="toggleLesson('${l}')">${state.completed.includes(l) ? '✓' : 'Mark Done'}</button>
+                    <div class="lesson-wrap">
+                        <div class="lesson ${state.completed.includes(l) ? 'done' : ''}">
+                            <span>${l}</span>
+                            <button class="btn-secondary" onclick="toggleLesson('${l}')">${state.completed.includes(l) ? '✓' : 'Done'}</button>
+                        </div>
+                        <textarea class="ui-input note-box" placeholder="Take notes for ${l}..." onblur="saveNote('${l}', this.value)">${state.notes[l] || ''}</textarea>
                     </div>
                 `).join('')}
             </div>`;
@@ -36,21 +43,16 @@ function render(query = "") {
 
 function updateMetrics() {
     const total = curriculum.flatMap(m => m.lessons).length;
-    const pct = Math.round((state.completed.length / total) * 100);
+    const pct = total > 0 ? Math.round((state.completed.length / total) * 100) : 0;
     document.getElementById('progress-fill').style.width = pct + "%";
     document.getElementById('stats-text').innerText = pct + "% Optimization";
 }
 
-function saveAndRender() {
-    localStorage.setItem('hubState', JSON.stringify(state));
-    render(document.getElementById('search').value);
-}
+function saveAndRender() { localStorage.setItem('hubState', JSON.stringify(state)); render(document.getElementById('search').value); }
 
-// Prompt handlers remain the same, integrated into state
 function savePrompt() {
-    const n = document.getElementById('prompt-name').value;
-    const b = document.getElementById('prompt-body').value;
-    if(n && b) { state.prompts.push({n, b}); document.getElementById('prompt-name').value = ''; document.getElementById('prompt-body').value = ''; saveAndRender(); }
+    const n = document.getElementById('prompt-name'), b = document.getElementById('prompt-body');
+    if(n.value && b.value) { state.prompts.push({n: n.value, b: b.value}); n.value = b.value = ''; saveAndRender(); }
 }
 
 function renderPrompts() {
@@ -59,6 +61,12 @@ function renderPrompts() {
             <strong>${p.n}</strong><p style="font-size:0.85rem">${p.b}</p>
             <button class="btn-secondary" style="font-size:0.7rem" onclick="state.prompts.splice(${i},1); saveAndRender();">Delete</button>
         </div>`).join('');
+}
+
+function exportData() {
+    const a = document.createElement('a');
+    a.href = 'data:application/json,' + encodeURIComponent(JSON.stringify(state));
+    a.download = 'hub-data.json'; a.click();
 }
 
 document.getElementById('search').oninput = (e) => render(e.target.value);
