@@ -1,17 +1,13 @@
-:root { 
-    --primary: #0f7685; --primary-hover: #0a5c68; --bg-main: #eef6f7; 
-    --bg-card: #ffffff; --text-main: #1e3a40; --text-muted: #5d7a80; 
-    --border: #c1d6d9; --danger: #b91c1c; 
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: var(--text-main); padding: 2rem; display: flex; justify-content: center; height: 100vh; }
-#dashboard { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; width: 100%; max-width: 1400px; height: 100%; }
-#sidebar { background: var(--bg-card); border-radius: 16px; padding: 2rem; border: 1px solid var(--border); display: flex; flex-direction: column; gap: 1.5rem; height: fit-content; }
-#progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width 0.6s ease; }
-#main-content { background: var(--bg-card); border-radius: 16px; padding: 2.5rem; border: 1px solid var(--border); overflow-y: auto; height: 100%; }
-h3 { font-size: 1.1rem; color: var(--primary); margin: 2rem 0 1rem 0; padding-bottom: 0.5rem; border-bottom: 2px solid var(--bg-main); text-transform: uppercase; letter-spacing: 0.05em; }
-.lesson { background: var(--bg-card); padding: 1.25rem; margin-bottom: 1rem; border: 1px solid var(--border); border-radius: 12px; display: flex; flex-direction: column; gap: 0.75rem; transition: all 0.2s ease; }
-.lesson:hover { border-color: var(--primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-.lesson-row { display: flex; justify-content: space-between; align-items: center; }
-.lesson-link { color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
-#sandbox { margin-top: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 16px; border: 1px solid var(--border); }
+:root { --primary: #0f7685; --bg-main: #eef6f7; --bg-card: #ffffff; --border: #c1d6d9; --text-main: #1e3a40; --danger: #b91c1c; }
+* { box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: var(--text-main); padding: 2rem; display: flex; justify-content: center; min-height: 100vh; }
+#dashboard { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; width: 100%; max-width: 1400px; }
+.ui-card { background: var(--bg-card); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+.ui-input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem; background: var(--bg-main); font-family: 'Inter', sans-serif; }
+.btn-primary { background: var(--primary); color: white; border: none; padding: 0.75rem; border-radius: 8px; width: 100%; font-weight: 600; cursor: pointer; }
+.btn-danger { background: white; color: var(--danger); border: 1px solid var(--danger); padding: 0.75rem; border-radius: 8px; width: 100%; cursor: pointer; }
+.btn-secondary { background: var(--bg-card); border: 1px solid var(--border); padding: 0.75rem; border-radius: 8px; width: 100%; cursor: pointer; }
+.lesson { @extend .ui-card; border: 1px solid var(--border); padding: 1.25rem; border-radius: 12px; margin-bottom: 1rem; }
+h3 { color: var(--primary); font-size: 1.1rem; margin: 1.5rem 0 1rem; border-bottom: 2px solid var(--bg-main); }
+.badge { background: var(--primary); color: white; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; }
+.focus-mode #sidebar { display: none; }
