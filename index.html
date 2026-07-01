@@ -26,16 +26,15 @@
             </div>
             <div id="progress-bar"><div id="progress-fill"></div></div>
             <section id="weekly-audit">
-                <h2>15-Minute Audit</h2>
+                <div class="audit-header"><h2>15-Minute Audit</h2></div>
                 <textarea id="weekly-goals" placeholder="Define this week's high-leverage goals..."></textarea>
-                <button class="btn-danger" onclick="resetWeeklyLog()">Reset Week</button>
+                <button class="btn-danger" onclick="resetWeeklyLog()">Reset Efficiency Stats</button>
             </section>
             <div class="sidebar-actions">
                 <button id="focus-btn" class="btn-primary" onclick="toggleFocusMode()">Toggle Deep-Focus</button>
                 <button id="export-btn" class="btn-secondary">Export Log</button>
             </div>
         </aside>
-
         <main id="main-content">
             <div class="search-container">
                 <input type="text" id="search" placeholder="Search lessons or resources..." onkeyup="render()">
