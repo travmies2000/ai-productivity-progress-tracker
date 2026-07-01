@@ -15,42 +15,29 @@
                 <p class="subtitle">AI Productivity System</p>
             </header>
             <div class="metric-cards">
-                <div class="metric">
-                    <span class="metric-label">Mastery</span>
-                    <span class="metric-value"><span id="pct">0</span>%</span>
-                </div>
-                <div class="metric">
-                    <span class="metric-label">Time Saved</span>
-                    <span class="metric-value"><span id="total-time">0</span> min</span>
-                </div>
+                <div class="metric"><span class="metric-label">Mastery</span><span class="metric-value"><span id="pct">0</span>%</span></div>
+                <div class="metric"><span class="metric-label">Time Saved</span><span class="metric-value"><span id="total-time">0</span> min</span></div>
             </div>
             <div id="progress-bar"><div id="progress-fill"></div></div>
-            <section id="weekly-audit">
+            <section id="weekly-audit" class="ui-card">
                 <div class="audit-header"><h2>15-Minute Audit</h2></div>
-                <textarea id="weekly-goals" placeholder="Define this week's high-leverage goals..."></textarea>
-                <button class="btn-danger" onclick="resetWeeklyLog()">Reset Efficiency Stats</button>
+                <textarea id="weekly-goals" class="ui-input" placeholder="Define this week's goals..."></textarea>
+                <button class="btn-danger" onclick="resetWeeklyLog()">Reset Efficiency</button>
             </section>
             <div class="sidebar-actions">
-                <button id="focus-btn" class="btn-primary" onclick="toggleFocusMode()">Toggle Deep-Focus</button>
-                <button id="export-btn" class="btn-secondary">Export Log</button>
+                <button class="btn-primary" onclick="toggleFocusMode()">Toggle Deep-Focus</button>
+                <button class="btn-secondary" id="export-btn">Export Log</button>
             </div>
         </aside>
         <main id="main-content">
-            <div class="search-container">
-                <input type="text" id="search" placeholder="Search lessons or resources..." onkeyup="render()">
-            </div>
+            <input type="text" id="search" class="ui-input" placeholder="Search lessons..." onkeyup="render()">
             <div id="course-list"></div>
-            <section id="sandbox">
-                <div class="sandbox-header">
-                    <h2>Prompt Sandbox</h2>
-                    <span class="badge">Professional Tool</span>
-                </div>
-                <div class="sandbox-inputs">
-                    <input type="text" id="prompt-name" placeholder="Prompt Name">
-                    <textarea id="prompt-body" placeholder="Paste your engineered prompt here..."></textarea>
-                    <textarea id="prompt-notes" placeholder="Version notes or iteration thoughts..."></textarea>
-                    <button class="btn-primary" onclick="savePrompt()">Save to Hub</button>
-                </div>
+            <section id="sandbox" class="ui-card">
+                <div class="sandbox-header"><h2>Prompt Sandbox</h2><span class="badge">Professional</span></div>
+                <input type="text" id="prompt-name" class="ui-input" placeholder="Prompt Name">
+                <textarea id="prompt-body" class="ui-input" placeholder="Prompt content..."></textarea>
+                <textarea id="prompt-notes" class="ui-input" placeholder="Notes..."></textarea>
+                <button class="btn-primary" onclick="savePrompt()">Save to Hub</button>
                 <div id="saved-prompts"></div>
             </section>
         </main>
