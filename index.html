@@ -3,41 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Productivity System | Executive Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Enterprise AI Hub | Professional Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="dashboard">
         <aside id="sidebar">
-            <header>
-                <h1>Command Center</h1>
-                <p class="subtitle">AI Productivity System</p>
-            </header>
-            <div class="metric-cards">
-                <div class="metric"><span class="metric-label">Mastery</span><span class="metric-value"><span id="pct">0</span>%</span></div>
-                <div class="metric"><span class="metric-label">Time Saved</span><span class="metric-value"><span id="total-time">0</span> min</span></div>
+            <div class="brand-box"><h1>AI Edge</h1><p>Executive Command</p></div>
+            <!-- Value Add: Visual Progress -->
+            <div class="ui-card">
+                <h3>System Health</h3>
+                <div id="progress-bar"><div id="progress-fill"></div></div>
+                <p id="stats-text">0% Optimization</p>
             </div>
-            <div id="progress-bar"><div id="progress-fill"></div></div>
             <section id="weekly-audit" class="ui-card">
-                <div class="audit-header"><h2>15-Minute Audit</h2></div>
-                <textarea id="weekly-goals" class="ui-input" placeholder="Define this week's goals..."></textarea>
-                <button class="btn-danger" onclick="resetWeeklyLog()">Reset Efficiency</button>
+                <h2>Weekly Focus</h2>
+                <textarea id="weekly-goals" class="ui-input" placeholder="Define high-leverage goals..."></textarea>
             </section>
-            <div class="sidebar-actions">
-                <button class="btn-primary" onclick="toggleFocusMode()">Toggle Deep-Focus</button>
-                <button class="btn-secondary" id="export-btn">Export Log</button>
-            </div>
         </aside>
         <main id="main-content">
-            <input type="text" id="search" class="ui-input" placeholder="Search lessons..." onkeyup="render()">
+            <div class="toolbar">
+                <input type="text" id="search" class="ui-input" placeholder="Search workflow modules..." onkeyup="render()">
+                <button class="btn-secondary" onclick="exportData()">Export Data</button>
+            </div>
             <div id="course-list"></div>
             <section id="sandbox" class="ui-card">
-                <div class="sandbox-header"><h2>Prompt Sandbox</h2><span class="badge">Professional</span></div>
+                <div class="sandbox-header"><h2>Prompt Engineering Suite</h2><span class="badge">Enterprise</span></div>
                 <input type="text" id="prompt-name" class="ui-input" placeholder="Prompt Name">
-                <textarea id="prompt-body" class="ui-input" placeholder="Prompt content..."></textarea>
-                <textarea id="prompt-notes" class="ui-input" placeholder="Notes..."></textarea>
-                <button class="btn-primary" onclick="savePrompt()">Save to Hub</button>
+                <textarea id="prompt-body" class="ui-input" placeholder="Engineered prompt structure..."></textarea>
+                <button class="btn-primary" onclick="savePrompt()">Deploy to Library</button>
                 <div id="saved-prompts"></div>
             </section>
         </main>
