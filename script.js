@@ -18,6 +18,8 @@ let timeSaved = JSON.parse(localStorage.getItem('timeSaved')) || {};
 let statusTags = JSON.parse(localStorage.getItem('statusTags')) || {};
 let savedPrompts = JSON.parse(localStorage.getItem('myPrompts')) || [];
 
+function toggleFocusMode() { document.body.classList.toggle('focus-mode'); }
+
 function render() {
     const query = document.getElementById('search').value.toLowerCase();
     const container = document.getElementById('course-list');
@@ -60,11 +62,11 @@ window.toggleStatus = (l) => {
 };
 
 function savePrompt() {
-    const n = document.getElementById('prompt-name').value, b = document.getElementById('prompt-body').value;
-    if(n && b) { savedPrompts.push({n, b}); localStorage.setItem('myPrompts', JSON.stringify(savedPrompts)); render(); }
+    const n = document.getElementById('prompt-name').value, b = document.getElementById('prompt-body').value, notes = document.getElementById('prompt-notes').value;
+    if(n && b) { savedPrompts.push({n, b, notes}); localStorage.setItem('myPrompts', JSON.stringify(savedPrompts)); render(); }
 }
 function renderPrompts() {
-    document.getElementById('saved-prompts').innerHTML = savedPrompts.map(p => `<div class="prompt-card"><strong>${p.n}</strong>: ${p.b}</div>`).join('');
+    document.getElementById('saved-prompts').innerHTML = savedPrompts.map(p => `<div class="prompt-card"><strong>${p.n}</strong>: ${p.b} <br><small><em>Notes: ${p.notes}</em></small></div>`).join('');
 }
 function resetWeeklyLog() {
     if(confirm("Reset efficiency stats?")) { localStorage.removeItem('lessonRatings'); localStorage.removeItem('timeSaved'); localStorage.removeItem('statusTags'); location.reload(); }
