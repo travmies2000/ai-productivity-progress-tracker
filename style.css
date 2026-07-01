@@ -9,3 +9,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-main);
 .badge { background: #ccfbf1; color: #0f7685; padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 800; }
 #progress-bar { width: 100%; background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden; }
 #progress-fill { height: 100%; background: var(--primary); width: 0%; }
+.lesson.done span { text-decoration: line-through; color: var(--text-muted); }
+.lesson.done { background: #f8fafc; border: 1px solid #e2e8f0; }
+.btn-secondary { transition: 0.2s; }
+.btn-secondary:hover { background: var(--primary); color: white; }
