@@ -5,42 +5,61 @@ const curriculum = [
     { module: "Module 4: The Toolbox", lessons: ["Data Analysis", "Visual Communication", "Research & Fact-Checking"] },
     { module: "Module 5: Building Systems", lessons: ["Custom Instructions", "The 15-Minute Weekly Audit"] }
 ];
-let savedPrompts = JSON.parse(localStorage.getItem('myPrompts')) || [];
 
-function render() {
+let state = JSON.parse(localStorage.getItem('hubState')) || { completed: [], prompts: [] };
+
+function toggleLesson(lesson) {
+    const idx = state.completed.indexOf(lesson);
+    idx > -1 ? state.completed.splice(idx, 1) : state.completed.push(lesson);
+    saveAndRender();
+}
+
+function render(query = "") {
     const container = document.getElementById('course-list');
-    container.innerHTML = curriculum.map(mod => `
-        <div class="ui-card">
-            <h3>${mod.module}</h3>
-            ${mod.lessons.map(l => `<div class="lesson"><span>${l}</span><button class="btn-secondary">View</button></div>`).join('')}
-        </div>
-    `).join('');
+    container.innerHTML = curriculum.map(mod => {
+        const filtered = mod.lessons.filter(l => l.toLowerCase().includes(query.toLowerCase()));
+        if (filtered.length === 0) return "";
+        return `
+            <div class="ui-card">
+                <h3>${mod.module}</h3>
+                ${filtered.map(l => `
+                    <div class="lesson ${state.completed.includes(l) ? 'done' : ''}">
+                        <span>${l}</span>
+                        <button class="btn-secondary" onclick="toggleLesson('${l}')">${state.completed.includes(l) ? '✓' : 'Mark Done'}</button>
+                    </div>
+                `).join('')}
+            </div>`;
+    }).join('');
+    updateMetrics();
     renderPrompts();
 }
 
+function updateMetrics() {
+    const total = curriculum.flatMap(m => m.lessons).length;
+    const pct = Math.round((state.completed.length / total) * 100);
+    document.getElementById('progress-fill').style.width = pct + "%";
+    document.getElementById('stats-text').innerText = pct + "% Optimization";
+}
+
+function saveAndRender() {
+    localStorage.setItem('hubState', JSON.stringify(state));
+    render(document.getElementById('search').value);
+}
+
+// Prompt handlers remain the same, integrated into state
 function savePrompt() {
-    const n = document.getElementById('prompt-name'), b = document.getElementById('prompt-body');
-    if(n.value && b.value) {
-        savedPrompts.push({n: n.value, b: b.value});
-        localStorage.setItem('myPrompts', JSON.stringify(savedPrompts));
-        n.value = b.value = '';
-        render();
-    }
+    const n = document.getElementById('prompt-name').value;
+    const b = document.getElementById('prompt-body').value;
+    if(n && b) { state.prompts.push({n, b}); document.getElementById('prompt-name').value = ''; document.getElementById('prompt-body').value = ''; saveAndRender(); }
 }
 
 function renderPrompts() {
-    document.getElementById('saved-prompts').innerHTML = savedPrompts.map((p, i) => `
-        <div class="ui-card" style="margin-top:1rem; border-left:5px solid var(--primary)">
-            <strong>${p.n}</strong><p>${p.b}</p>
-            <button class="btn-secondary" style="font-size:0.7rem; margin-top:10px" onclick="deletePrompt(${i})">Delete</button>
+    document.getElementById('saved-prompts').innerHTML = state.prompts.map((p, i) => `
+        <div class="ui-card" style="margin-top:10px; border-left:4px solid var(--primary)">
+            <strong>${p.n}</strong><p style="font-size:0.85rem">${p.b}</p>
+            <button class="btn-secondary" style="font-size:0.7rem" onclick="state.prompts.splice(${i},1); saveAndRender();">Delete</button>
         </div>`).join('');
 }
 
-function deletePrompt(i) { savedPrompts.splice(i,1); localStorage.setItem('myPrompts', JSON.stringify(savedPrompts)); render(); }
-function exportData() {
-    const data = JSON.stringify(localStorage);
-    const a = document.createElement('a');
-    a.href = 'data:application/json,' + encodeURIComponent(data);
-    a.download = 'hub-data.json'; a.click();
-}
+document.getElementById('search').oninput = (e) => render(e.target.value);
 render();
