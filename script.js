@@ -46,7 +46,7 @@ function savePrompt() {
     const n = document.getElementById('prompt-name'), b = document.getElementById('prompt-body'), notes = document.getElementById('prompt-notes');
     if (n.value && b.value) { savedPrompts.push({ n: n.value, b: b.value, notes: notes.value }); localStorage.setItem('myPrompts', JSON.stringify(savedPrompts)); n.value = b.value = notes.value = ''; render(); }
 }
-function renderPrompts() { document.getElementById('saved-prompts').innerHTML = savedPrompts.map((p, i) => `<div class="prompt-card"><strong>${p.n}</strong><p>${p.b}</p><small><em>Notes: ${p.notes}</em></small><button class="btn-danger" style="margin-top:8px; padding:4px;" onclick="deletePrompt(${i})">Delete</button></div>`).join(''); }
+function renderPrompts() { document.getElementById('saved-prompts').innerHTML = savedPrompts.map((p, i) => `<div class="prompt-card"><strong style="color:var(--primary);display:block;margin-bottom:0.5rem;">${p.n}</strong><p style="margin-bottom:0.5rem;">${p.b}</p><small style="color:var(--text-muted);font-style:italic;">Notes: ${p.notes}</small><button class="btn-danger" style="margin-top:10px;padding:4px;width:auto;font-size:0.7rem;" onclick="deletePrompt(${i})">Delete</button></div>`).join(''); }
 function deletePrompt(i) { savedPrompts.splice(i, 1); localStorage.setItem('myPrompts', JSON.stringify(savedPrompts)); render(); }
 window.rate = (l, s) => { ratings[l] = s; localStorage.setItem('lessonRatings', JSON.stringify(ratings)); render(); };
 window.updateTime = (l, v) => { timeSaved[l] = v; localStorage.setItem('timeSaved', JSON.stringify(timeSaved)); render(); };
